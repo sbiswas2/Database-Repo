@@ -10,10 +10,9 @@
 <body>
     <!-- Need a Table with Employee Name, Role, Start Date, Months Works, Pay Rate and Total Billed -->
     <div class="container">
-        <table class="table">
+        <table class="table" id="employeeData">
             <thead class="thead-default">
                 <tr>
-                    <th>#</th>
                     <th>Employee Name</th>
                     <th>Role</th>
                     <th>Start Date</th>
@@ -24,25 +23,6 @@
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark Otto</td>
-                    <td>Role</td>
-                    <td>9/13/2017</td>
-                    <td>3</td>
-                    <td>$$ Rate</td>
-                    <td>Not Enough</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Mark Otto</td>
-                    <td>Role</td>
-                    <td>9/13/2017</td>
-                    <td>3</td>
-                    <td>$$ Rate</td>
-                    <td>Not Enough</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
                     <td>Mark Otto</td>
                     <td>Role</td>
                     <td>9/13/2017</td>
@@ -111,6 +91,8 @@
 
        // event.preventDefault();
 
+       
+
         name = $("#employeeName").val().trim();
         role = $("#role").val().trim();
         startDate = $("#startDate").val().trim();
@@ -126,6 +108,23 @@
       });
 
     });
+
+    database.ref().on("child_added", function(snapshot) {
+
+        console.log(snapshot.val().name);
+
+        var newRow = $("<tr>");
+        var newName = $("<td>").text(snapshot.val().name);
+        var newRole = $("<td>").text(snapshot.val().role);
+        var newStartDate = $("<td>").text(snapshot.val().startDate);
+        var newMonthsWorked = $("<td>").text(snapshot.val().monthlyRate);
+        var newMonthlyRate = $("<td>").text(snapshot.val().monthlyRate);
+        var newTotalBilled = $("<td>").text(snapshot.val().name);
+        newRow.append(newName);
+        newRow.append(newRole);
+        $("#employeeData").append(newRow);
+
+    })
     </script>
 </body>
 
