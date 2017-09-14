@@ -95,6 +95,16 @@
       };
       firebase.initializeApp(config);
 
+      var name = $("#employeeName").val().trim();
+      var role = $("#role").val().trim();
+      var startDate = $("#startDate").val().trim();
+      var monthlyRate = $("#monthlyRate").val().trim();
+
+      console.log(name);
+      console.log(role);
+      console.log(startDate);
+      console.log(monthlyRate);
+
     $("#submitBtn").on("click", function(event) {
 
         event.preventDefault();
