@@ -119,9 +119,13 @@
         var newStartDate = $("<td>").text(snapshot.val().startDate);
         var newMonthsWorked = $("<td>").text(snapshot.val().monthlyRate);
         var newMonthlyRate = $("<td>").text(snapshot.val().monthlyRate);
-        var newTotalBilled = $("<td>").text(snapshot.val().name);
+        var newTotalBilled = $("<td>").text(snapshot.val().monthlyRate);
         newRow.append(newName);
         newRow.append(newRole);
+        newRow.append(newStartDate);
+        newRow.append(newMonthsWorked);
+        newRow.append(newMonthlyRate);
+        newRow.append(newTotalBilled);
         $("#employeeData").append(newRow);
 
     })
