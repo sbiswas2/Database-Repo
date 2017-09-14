@@ -62,8 +62,13 @@
     
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- Firebase JavaScript Link -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+    <!-- Link to Moment.js should go here -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
     <script>
       var config = {
         apiKey: "AIzaSyB_9GJFw4rUU7Nc5Ktngnf38bPcoRP6FYI",
@@ -87,11 +92,11 @@
       var startDate = $("#startDate").val().trim();
       var monthlyRate = $("#monthlyRate").val().trim();
 
+      var todaysDate = new Date();
+
     $("#submitBtn").on("click", function(event) {
 
        // event.preventDefault();
-
-       
 
         name = $("#employeeName").val().trim();
         role = $("#role").val().trim();
@@ -99,27 +104,30 @@
         monthlyRate = $("#monthlyRate").val().trim();
 
         database.ref().push({
-        // firebase variable clickCount will equal our variable clickCounter
-        name: name,
-        role: role,
-        startDate: startDate,
-        monthlyRate: monthlyRate
-
-      });
-
+            name: name,
+            role: role,
+            startDate: startDate,
+            monthlyRate: monthlyRate
+        });
     });
 
     database.ref().on("child_added", function(snapshot) {
 
-        console.log(snapshot.val().name);
+        console.log(snapshot.val().startDate);
+
+        // var monthsWorked = (snapshot.val().startDate)
+
+        var today = new Date();
+        var inputDate = new Date(snapshot.val().startDate);
+        var difference = moment(today).diff(inputDate, "months");
 
         var newRow = $("<tr>");
         var newName = $("<td>").text(snapshot.val().name);
         var newRole = $("<td>").text(snapshot.val().role);
         var newStartDate = $("<td>").text(snapshot.val().startDate);
-        var newMonthsWorked = $("<td>").text(snapshot.val().monthlyRate);
-        var newMonthlyRate = $("<td>").text(snapshot.val().monthlyRate);
-        var newTotalBilled = $("<td>").text(snapshot.val().monthlyRate);
+        var newMonthsWorked = $("<td>").text(difference);
+        var newMonthlyRate = $("<td>").text("$" + snapshot.val().monthlyRate);
+        var newTotalBilled = $("<td>").text("$" + difference*(snapshot.val().monthlyRate));
         newRow.append(newName);
         newRow.append(newRole);
         newRow.append(newStartDate);
