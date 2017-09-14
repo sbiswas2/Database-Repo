@@ -85,7 +85,15 @@
     <!-- Firebase JavaScript Link -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
-    // javascript here
+      var config = {
+        apiKey: "AIzaSyB_9GJFw4rUU7Nc5Ktngnf38bPcoRP6FYI",
+        authDomain: "database-project-09-13-17.firebaseapp.com",
+        databaseURL: "https://database-project-09-13-17.firebaseio.com",
+        projectId: "database-project-09-13-17",
+        storageBucket: "database-project-09-13-17.appspot.com",
+        messagingSenderId: "854860932259"
+      };
+      firebase.initializeApp(config);
 
     $("#submitBtn").on("click", function(event) {
 
